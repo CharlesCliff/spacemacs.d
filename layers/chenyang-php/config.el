@@ -31,5 +31,6 @@
 (spacemacs|defvar-company-backends php-mode)
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+;; (configuration-layer//auto-mode 'chenyang-php 'php-mode)
 (configuration-layer//auto-mode 'chenyang-php 'php-mode)
 
