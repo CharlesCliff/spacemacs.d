@@ -29,11 +29,12 @@
 
 ;;; Code:
 
-(configuration-layer/declare-layers '(
+(configuration-layer/declare-used-layers'(
                                       zilongshanren-programming
                                       chenyang-better-defaults
                                       chenyang-ui
                                       chenyang-org
                                       chenyang-php
                                       chenyang-misc
+                                      ;; chenyang-xcode
                                       ))

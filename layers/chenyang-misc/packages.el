@@ -348,6 +348,10 @@
 
         (setq ivy-initial-inputs-alist nil)
 
+        ;; https://github.com/abo-abo/swiper/issues/608
+        (setq ivy-sort-matches-functions-alist nil)
+
+
         (when (not (configuration-layer/layer-usedp 'helm))
           (spacemacs/set-leader-keys "sp" 'counsel-git-grep)
           (spacemacs/set-leader-keys "sP" 'spacemacs/counsel-git-grep-region-or-symbol))

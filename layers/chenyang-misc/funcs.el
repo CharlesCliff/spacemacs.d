@@ -69,6 +69,34 @@
        (if (eq (car company-backends) ',backend)
            (setq-local company-backends (delete ',backend company-backends))
          (push ',backend company-backends)))))
+(defun zilongshanren/load-my-layout ()
+  (interactive)
+  (persp-load-state-from-file (concat persp-save-dir "zilong")))
+
+(defun zilongshanren/save-my-layout ()
+  (interactive)
+  (persp-save-state-to-file (concat persp-save-dir "zilong")))
+
+;; http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
+;; ;FIXME: make it work with zsh
+(defun counsel-yank-bash-history ()
+  "Yank the bash history"
+  (interactive)
+  (let (hist-cmd collection val)
+    (shell-command "history -r") ; reload history
+    (setq collection
+          (nreverse
+           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
+                                           (buffer-string))
+                         "\n"
+                         t)))
+    (when (and collection (> (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "Bash history:") collection))))
+      (kill-new val)
+      (message "%s => kill-ring" val))))
+
+
 
   ;; my fix for tab indent
 (defun zilongshanren/indent-region(numSpaces)
@@ -112,6 +140,51 @@
   (local-set-key (kbd "<tab>") 'zilongshanren/tab-region)
   (local-set-key (kbd "<S-tab>") 'zilongshanren/untab-region)
   )
+;; http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html
+(defun my-git-timemachine-show-selected-revision ()
+  "Show last (current) revision of file."
+  (interactive)
+  (let (collection)
+    (setq collection
+          (mapcar (lambda (rev)
+                    ;; re-shape list for the ivy-read
+                    (cons (concat (substring (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
+                  (git-timemachine--revisions)))
+    (ivy-read "commits:"
+              collection
+              :action (lambda (rev)
+                        (progn (git-timemachine-show-revision rev)
+                               (evil-emacs-state))))))
+
+(defun my-git-timemachine ()
+  "Open git snapshot with the selected version.  Based on ivy-mode."
+  (interactive)
+  (unless (featurep 'git-timemachine)
+    (require 'git-timemachine))
+  (git-timemachine--start #'my-git-timemachine-show-selected-revision))
+
+
+(defun zilongshanren/helm-hotspots ()
+  "helm interface to my hotspots, which includes my locations,
+org-files and bookmarks"
+  (interactive)
+  (helm :buffer "*helm: utities*"
+        :sources `(,(zilongshanren//hotspots-sources))))
+
+(defun zilongshanren//hotspots-sources ()
+  "Construct the helm sources for my hotspots"
+  `((name . "Mail and News")
+    (candidates . (("Calendar" . (lambda ()  (browse-url "https://www.google.com/calendar/render")))
+                   ("RSS" . elfeed)
+                   ("Blog" . org-octopress)
+                   ("Github" . (lambda() (helm-github-stars)))
+                   ("Calculator" . (lambda () (helm-calcul-expression)))
+                   ("Run current flie" . (lambda () (zilongshanren/run-current-file)))
+                   ("Agenda" . (lambda () (org-agenda "" "a")))
+                   ("sicp" . (lambda() (browse-url "http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html#%_toc_start")))))
+    (candidate-number-limit)
+    (action . (("Open" . (lambda (x) (funcall x)))))))
+
 
 
 ;; insert date and time
