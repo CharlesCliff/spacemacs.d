@@ -34,6 +34,7 @@
     (occur-mode :location built-in)
     (dired-mode :location built-in)
     (profiler :location built-in)
+    dired+
     )
   )
 (defun chenyang-better-defaults-packages/init-occur-mode ()
@@ -58,13 +59,13 @@
   (evilified-state-evilify occur-mode occur-mode-map
     "RET" 'occur-mode-goto-occurrence))
 
-(defun chenyang-better-defaults/init-dired-mode ()
+(defun chenyang-better-defaults/post-init-dired-mode ()
   (use-package dired-mode
     :init
     (progn
       (require 'dired-x)
       (require 'dired-aux)
-      (setq dired-listing-switches "-alh")
+      (setq dired-listing-switches "-aolh")
       (setq dired-guess-shell-alist-user
             '(("\\.pdf\\'" "open")
               ("\\.docx\\'" "open")
@@ -82,6 +83,8 @@
       ;; always delete and copy recursively
       (setq dired-recursive-deletes 'always)
       (setq dired-recursive-copies 'always)
+      (dired-hide-details-mode nil)
+      (dired-omit-mode nil)
 
       (defvar dired-filelist-cmd
         '(("vlc" "-L")))
@@ -186,3 +189,9 @@ open and unsaved."
   (use-package profiler
     :init
     (evilified-state-evilify profiler-report-mode profiler-report-mode-map)))
+
+(defun chenyang-better-defaults/init-dired+ ()
+  (use-package dired+
+    :defer t
+    :init
+    ))

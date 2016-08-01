@@ -55,14 +55,21 @@ values."
           magit-save-repository-buffers 'dontask
           magit-revert-buffers 'silent
           magit-refs-show-commit-count 'all
-          magit-revision-show-gravatars nil)
+          magit-revision-show-gravatars nil) 
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-help-tooltip t
                       :disabled-for org markdown)
+     (wakatime :variables
+               wakatime-api-key "05291874-84d3-48c4-8302-3422afd68536"
+               wakatime-cli-path "/usr/local/bin/wakatime")
 
+     command-log
+     ;; dash
+     ;; elfeed
+     fasd
      java
      chenyang
      ;; version-control
