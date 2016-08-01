@@ -65,7 +65,7 @@
     (progn
       (require 'dired-x)
       (require 'dired-aux)
-      (setq dired-listing-switches "-aolh")
+      (setq dired-listing-switches "-alh")
       (setq dired-guess-shell-alist-user
             '(("\\.pdf\\'" "open")
               ("\\.docx\\'" "open")
@@ -190,8 +190,8 @@ open and unsaved."
     :init
     (evilified-state-evilify profiler-report-mode profiler-report-mode-map)))
 
-(defun chenyang-better-defaults/init-dired+ ()
-  (use-package dired+
-    :defer t
-    :init
-    ))
+;; (defun chenyang-better-defaults/init-dired+ ()
+;;   (use-package dired+
+;;     :defer t
+;;     :init
+;;     ))

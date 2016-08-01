@@ -221,15 +221,33 @@
 
 (defun chenyang-org/init-blog-admin ()
   (use-package blog-admin
+    :commands blog-admin-start
     :init
-    (add-hook 'blog-admin-backend-after-new-post-hook 'find-file)
-    (setq blog-admin-backend-path "~/blog")
-    (setq blog-admin-backend-type 'hexo)
-    (setq blog-admin-backend-new-post-in-drafts t) ;; create new post in drafts by default
-    (setq blog-admin-backend-new-post-with-same-name-dir t) ;; create same-name directory with new post
-    (setq blog-admin-backend-hexo-config-file "_config.yml") ;; default assumes _config.yml
+    (progn
+      (add-hook 'blog-admin-backend-after-new-post-hook 'find-file)
+      (setq blog-admin-backend-path "~/blog")
+      (setq blog-admin-backend-type 'hexo)
+      (setq blog-admin-backend-hexo-drafts-dir "/source/blog")
+      (setq blog-admin-backend-new-post-in-drafts t) ;; create new post in drafts by default
+      (setq blog-admin-backend-new-post-with-same-name-dir t) ;; create same-name directory with new post
+      (setq blog-admin-backend-hexo-config-file "_config.yml")
+      (setq blog-admin-backend-hexo-template-org-post "#+TITLE: %s
+#+DATE: %s
+#+LAYOUT: post
+#+TAGS:
+#+CATEGORIES:
+
+**
+
+{{{more}}}
+"))
     :defer t))
 
+(defun chenyang-org/post-init-blog-admin ()
+  (defun my-blog-admin-start ()
+    (interactive)
+    (require 'blog-admin)
+    (blog-admin-start)))
 
 (defun chenyang-org/init-org-octopress ()
   (use-package org-octopress
