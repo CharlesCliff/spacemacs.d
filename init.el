@@ -71,6 +71,15 @@ values."
      ;; elfeed
      fasd
      java
+     html
+     (python :variables
+             python-test-runner '(nose pytest))
+     javascript
+     (typescript :variables
+                 typescript-fmt-on-save nil
+                 typescript-fmt-tool 'typescript-formatter)
+     (chinese :variables
+              chinese-enbale-fcitx t)
      chenyang
      ;; version-control
      )
@@ -80,7 +89,21 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(blog-admin)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(php-extras)
+   dotspacemacs-excluded-packages '(php-extras
+                                    counsel-projectile magit-gh-pulls magit-gitflow org-projectile evil-mc
+                        evil-args evil-ediff evil-exchange 
+                        evil-indent-plus centered-buffer-mode volatile-highlights
+                        spaceline holy-mode skewer-mode
+                        highlight-indentation vi-tilde-fringe eyebrowse hl-anything
+                        smooth-scrolling org-repo-todo org-download 
+                        livid-mode git-gutter git-gutter-fringe  evil-escape
+                        leuven-theme gh-md  spray lorem-ipsum
+                        ac-ispell ace-jump-mode  auto-dictionary
+                        clang-format define-word google-translate disaster epic
+                        fancy-battery neotree spacemacs-theme
+                        helm-flyspell flyspell-correct-helm
+                        helm-c-yasnippet ace-jump-helm-line helm-make helm-projectile
+                        helm-themes helm-swoop helm-spacemacs-help)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -145,10 +168,11 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 17
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.0)
+   
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -304,7 +328,7 @@ you should place your code here."
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
+      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 17 20)))
 
   (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
 

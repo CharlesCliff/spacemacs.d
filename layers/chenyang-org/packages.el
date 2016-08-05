@@ -81,6 +81,9 @@
       (setq org-clock-out-remove-zero-time-clocks t) ;; Show the clocked-in task - if any - in the header line
 
       (setq org-tags-match-list-sublevels nil)
+      (toggle-truncate-lines t)
+      (turn-on-iimage-mode)
+      (iimage-mode-buffer t)
 
       ;; http://wenshanren.org/?p=327
       ;; change it to ivy

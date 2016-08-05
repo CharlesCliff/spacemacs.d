@@ -9,6 +9,8 @@
 ;;
 ;;; License: GPLv3
 
+(electric-pair-mode t)
+(show-paren-mode t)
 (setq auto-coding-regexp-alist
       (delete (rassoc 'utf-16be-with-signature auto-coding-regexp-alist)
               (delete (rassoc 'utf-16le-with-signature auto-coding-regexp-alist)
