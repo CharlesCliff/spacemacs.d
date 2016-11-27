@@ -96,6 +96,8 @@
 ;;   (use-package phpcbf
 ;;     :defer t))
 
+(defun chenyang-php/post-init-ede-php-autoload ()
+  (add-hook 'php-mode-hook #'ede-php-autoload-mode))
 
 
 
@@ -116,8 +118,10 @@
     :defer t
     :init))
 
-(defun chenyang-php/init-ede-php-autoload-mode ()
-  (use-package ede-php-autoload-mode
-    :init (progn
-            (spacemacs/add-to-hook  'php-mode-hook 'ede-php-autoload-mode)
-            (add-hook 'php-mode-hook #'ede-php-autoload-mode))))
+(defun chenyang-php/init-ede-php-autoload ()
+  (use-package ede-php-autoload
+    :init
+    :config
+    (progn
+      ;; (spacemacs/add-to-hook  'php-mode-hook 'ede-php-autoload-mode)
+      (add-hook 'php-mode-hook #'ede-php-autoload-mode))))

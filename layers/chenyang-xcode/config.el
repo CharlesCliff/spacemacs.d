@@ -28,9 +28,12 @@
 ;;   `chenyang-php/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
-(spacemacs|defvar-company-backends php-mode)
+;; (spacemacs|defvar-company-backends php-mode)
 
 ;; (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-;; (configuration-layer//auto-mode 'chenyang-php 'php-mode)
+;; ;; (configuration-layer//auto-mode 'chenyang-php 'php-mode)
 ;; (configuration-layer//auto-mode 'chenyang-php 'php-mode)
 
+
+(spacemacs|defvar-company-backends swift-mode)
+;; (add-to-list 'company-backends-swift-mode 'company-sourcekit)

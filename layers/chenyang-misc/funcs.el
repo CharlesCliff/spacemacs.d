@@ -71,11 +71,11 @@
          (push ',backend company-backends)))))
 (defun zilongshanren/load-my-layout ()
   (interactive)
-  (persp-load-state-from-file (concat persp-save-dir "zilong")))
+  (persp-load-state-from-file (concat persp-save-dir "chenyang")))
 
 (defun zilongshanren/save-my-layout ()
   (interactive)
-  (persp-save-state-to-file (concat persp-save-dir "zilong")))
+  (persp-save-state-to-file (concat persp-save-dir "chenyang")))
 
 ;; http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
 ;; ;FIXME: make it work with zsh
